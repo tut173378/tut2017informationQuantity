@@ -1,4 +1,4 @@
-package s4.b173378; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID. 
+package s4.b173378; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID.
 import java.lang.*;
 import s4.specification.*;
 
@@ -24,8 +24,8 @@ public interface InformationEstimatorInterface{
 // It returns Double.MAX_VALUE, when the true value is infinite, or space is not set.
 // The behavior is undefined, if the true value is finete but larger than Double.MAX_VALUE.
 // Note that this happens only when the space is unreasonably large. We will encounter other problem anyway.
-// Otherwise, estimation of information quantity, 
-}                        
+// Otherwise, estimation of information quantity,
+}
 */
 
 
@@ -69,6 +69,28 @@ public class TestCase {
 	    System.out.println("Exception occurred: STOP");
 	}
 
+  try {
+     InformationEstimatorInterface myObject;
+     double value;
+     System.out.println("checking s4.b173378.InformationEstimator");
+     myObject = new s4.b173378.InformationEstimator();
+     myObject.setSpace("3210321001230123".getBytes());
+     myObject.setTarget("05".getBytes());
+     value = myObject.estimation();
+     System.out.println(">05 "+value);
+     myObject.setTarget("03".getBytes());
+     value = myObject.estimation();
+     System.out.println(">03 "+value);
+     myObject.setTarget("321".getBytes());
+     value = myObject.estimation();
+     System.out.println(">321 "+value);
+     myObject.setTarget("001".getBytes());
+     value = myObject.estimation();
+     System.out.println(">001 "+value);
+ }
+ catch(Exception e) {
+     System.out.println("Exception occurred: STOP");
+ }
+
     }
-}	    
-	    
+}
