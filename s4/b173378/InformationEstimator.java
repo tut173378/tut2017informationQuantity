@@ -1,4 +1,4 @@
-package s4.b173378; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID. 
+package s4.b173378; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID.
 import java.lang.*;
 import s4.specification.*;
 
@@ -11,8 +11,8 @@ public interface InformationEstimatorInterface{
 // It returns Double.MAX_VALUE, when the true value is infinite, or space is not set.
 // The behavior is undefined, if the true value is finete but larger than Double.MAX_VALUE.
 // Note that this happens only when the space is unreasonably large. We will encounter other problem anyway.
-// Otherwise, estimation of information quantity, 
-}                        
+// Otherwise, estimation of information quantity,
+}
 */
 
 public class InformationEstimator implements InformationEstimatorInterface{
@@ -33,20 +33,23 @@ public class InformationEstimator implements InformationEstimatorInterface{
     double iq(int freq) {
 	return  - Math.log10((double) freq / (double) mySpace.length)/ Math.log10((double) 2.0);
     }
-
-    public void setTarget(byte [] target) { myTarget = target;}
-    public void setSpace(byte []space) { 
+    public void setTarget(byte [] target) {myTarget = target;}
+    public void setSpace(byte []space) {
 	myFrequencer = new Frequencer();
-	mySpace = space; myFrequencer.setSpace(space); 
+	mySpace = space; myFrequencer.setSpace(space);
     }
 
     public double estimation(){
+    if(myTarget == null || myTarget.length == 0){
+        return 0;}
 	boolean [] partition = new boolean[myTarget.length+1];
 	int np;
 	np = 1<<(myTarget.length-1);
 	// System.out.println("np="+np+" length="+myTarget.length);
 	double value = Double.MAX_VALUE; // value = mininimum of each "value1".
-
+    if(mySpace == null || mySpace.length == 0){
+        return Double.MAX_VALUE;
+    }
 	for(int p=0; p<np; p++) { // There are 2^(n-1) kinds of partitions.
 	    // binary representation of p forms partition.
 	    // for partition {"ab" "cde" "fg"}
@@ -66,7 +69,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	    while(start<myTarget.length) {
 		// System.out.write(myTarget[end]);
 		end++;;
-		while(partition[end] == false) { 
+		while(partition[end] == false) {
 		    // System.out.write(myTarget[end]);
 		    end++;
 		}
@@ -102,8 +105,3 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	System.out.println(">00 "+value);
     }
 }
-				  
-			       
-
-	
-    
